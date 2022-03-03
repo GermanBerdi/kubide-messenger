@@ -1,9 +1,13 @@
 import { Controller, Get } from '@nestjs/common';
 
+type Healt = {
+    status : string;
+}
+
 @Controller('health')
 export class HealthController {
     @Get()
-    getStatus(): string {
-        return ('{status:ok}');
+    getStatus(): Healt {
+        return ({status:'ok'});
     }
 }
