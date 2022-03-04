@@ -1,5 +1,4 @@
-import { Controller, Get, Post, Put, Req } from '@nestjs/common';
-import { Request } from 'express';
+import { Controller, Get, Post, Put, Param, Body} from '@nestjs/common';
 
 //creo una constante userModel para poder acceder a mongoDb
 const userModel = require('./users.model');
@@ -20,43 +19,42 @@ export class UsersController {
     //Devolver la lista de usuarios
     @Get()
     async listUsers(): Promise<any> {
-
         const usersList = await userModel.find({});
-
-        return await usersList;
+        return usersList;
     }
 
     //Crear usuario
     @Post()
-    async createUser(@Req() request: Request): Promise<any> {
-    
-        //Guardo en una constante los datos del usuario a crear recibidos en el request
-        const newUser = request.body;
-
-        //Guardo en una constante el resultado de haber insertado un usuario en la BBDD
+    async createUser(@Body() body: Body): Promise<any> {
+        const newUser = body;
         const createdUser = await userModel.create(newUser);
-
         return createdUser;
     }
 
+    //Loguear usuario y obtener token
     @Get('login')
     loginUser(): string {
         return 'Aqui se loguea el usuario y obtiene su token';
     }
 
-    @Put()
-    editUser(): string {
-        return 'Esto edita un usuario';
+    //Editar datos del usuario
+    @Put('profile/:id')
+    async editUser(@Param() params:any,@Body() body: Body): Promise<any> {
+        const usersData = await userModel.findOneAndUpdate({_id: params.id},body);
+        return usersData;
     }
 
     //Consultar datos de un Usuario
-    @Get('profile')
-    queryUser(): string {
-        return 'Aqui consulto los datos del usuario "userId"';
+    @Get('profile/:id')
+    async queryUser(@Param() params:any): Promise<any> {
+        const usersData = await userModel.findById(params.id);
+        return usersData;
     }
 
+    //Devuelve la lista de usuarios activos
     @Get('active')
-    listActiveUsers(): string {
-        return 'Esto devuelve la lista de usuarios activos';
+    async listActiveUsers(): Promise<any> {
+        const usersActiveList = await userModel.find({active: true});
+        return usersActiveList;
     }
 }

@@ -2,9 +2,7 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 
 /*TODO:
-  Hay que modificar el request POST /users/ para que cree un usuario que recibe en body en lugar de uno hardcodeado
-
-  implementar un try ----> catch en los acceso a BBDD
+  implementar un try ----> catch en los accesos a BBDD
 
   Si apunto la variable de entorno a mongo atlas se cae, solo funciona en local en la maquina de linux, hay que corregir esto
 
