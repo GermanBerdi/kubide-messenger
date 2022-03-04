@@ -1,13 +1,10 @@
-import { Controller, Get, Post, Put } from '@nestjs/common';
+import { Controller, Get, Post, Put, Req } from '@nestjs/common';
+import { Request } from 'express';
 
-/*enum statusType {
-    online,
-    offline,
-    away,
-    busy
-}*/
+//creo una constante userModel para poder acceder a mongoDb
+const userModel = require('./users.model');
 
-type User = {
+/*type User = {
       userId   : number;          //Id del usuario. Unico para cada usuario
       name     : string;          //Nombre del usuario.
       lastName : string;          //Apellido del usuario.
@@ -15,51 +12,31 @@ type User = {
 //    password : string;          //Password del usuario.
 //    active   : boolean;         //Define si el usuario esta activo o no.
 //    status   : statusType;      //Estado del usuario puede ser (online, offline, away, busy)
-}
+}*/
 
 @Controller('users')
 export class UsersController {
 
     //Devolver la lista de usuarios
     @Get()
-    listUsers(): User[] {
-        
-        let user:User;
-        let users:User[];
+    async listUsers(): Promise<any> {
 
-        //dejo el array vacio para poder usar el metodo push
-        users = [];
+        const usersList = await userModel.find({});
 
-        user = {
-            userId   : 1,
-            name     : "German",
-            lastName : "Berdichevsky",
-            email    : "german.metha@gmail.com"
-        }
-        users.push(user);
-      
-        user = {
-            userId   : 2,
-            name     : "Leonel",
-            lastName : "Berdichevsky",
-            email    : "leonel.metha@gmail.com"
-        }
-        users.push(user);
-
-        user = {
-            userId   : 3,
-            name     : "Juan Carlos",
-            lastName : "Berdichevsky",
-            email    : "juanpi.metha@gmail.com"
-        }
-        users.push(user);
-        
-        return users;
+        return await usersList;
     }
 
+    //Crear usuario
     @Post()
-    createUser(): string {
-        return 'Tras verificar el email del usuario no existe, esto crea un usuario';
+    async createUser(@Req() request: Request): Promise<any> {
+    
+        //Guardo en una constante los datos del usuario a crear recibidos en el request
+        const newUser = request.body;
+
+        //Guardo en una constante el resultado de haber insertado un usuario en la BBDD
+        const createdUser = await userModel.create(newUser);
+
+        return createdUser;
     }
 
     @Get('login')
@@ -72,6 +49,7 @@ export class UsersController {
         return 'Esto edita un usuario';
     }
 
+    //Consultar datos de un Usuario
     @Get('profile')
     queryUser(): string {
         return 'Aqui consulto los datos del usuario "userId"';
