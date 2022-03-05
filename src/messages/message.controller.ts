@@ -14,6 +14,7 @@ export class MessageController {
     ) {}
 
     //When create a message also create the proper notification
+    //TODO check the user exist and he is active before sent
     @Post()
     async createMessage(@Res() response, @Body() message: Message) {
         message.date = new Date();
