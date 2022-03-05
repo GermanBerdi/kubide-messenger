@@ -17,14 +17,14 @@ export class NotificationService {
         return await this.notificationModel.find()
             .populate("owner")
             .populate("message")
-            .exec();
+            .lean();
     }
 
     async readById(id): Promise<Notification> {
         return await this.notificationModel.findById(id)
             .populate("owner")
             .populate("message")
-            .exec();
+            .lean();
     }
 
     async update(id, notification: Notification): Promise<Notification> {

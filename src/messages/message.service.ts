@@ -26,13 +26,13 @@ export class MessageService {
     async readAll(): Promise<Message[]> {
         return await this.messageModel.find()
             .populate(populateUsers)
-            .exec();
+            .lean();
     }
 
     async readById(id): Promise<Message> {
         return await this.messageModel.findById(id)
             .populate(populateUsers)
-            .exec();
+            .lean();
     }
 
     async update(id, message: Message): Promise<Message> {

@@ -14,19 +14,19 @@ export class UserService {
     }
 
     async readAll(): Promise<User[]> {
-        return await this.userModel.find().exec();
+        return await this.userModel.find().lean();
     }
 
     async readActive(): Promise<User[]> {
-        return await this.userModel.find({active: true}).exec();
+        return await this.userModel.find({active: true}).lean();
     }
 
     async readById(id): Promise<User> {
-        return await this.userModel.findById(id).exec();
+        return await this.userModel.findById(id).lean();
     }
 
     async readByEmail(email): Promise<User> {
-        return await this.userModel.findOne({email}).exec();
+        return await this.userModel.findOne({email}).lean();
     }
 
     async isDuplicateEmail(email: String): Promise<Boolean> {
