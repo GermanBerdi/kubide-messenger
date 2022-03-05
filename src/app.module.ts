@@ -3,28 +3,21 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { MongooseModule } from '@nestjs/mongoose';
 import { HealthController } from './health/health.controller';
-import { UserController } from './users/user.controller';
-import { User, UserSchema } from './users/user.schema';
-import { UserService } from './users/user.service';
-import { MessageController } from './messages/message.controller';
-import { Message, MessageSchema } from './messages/message.schema';
-import { MessageService } from './messages/message.service';
-import { NotificationController } from './notifications/notification.controller';
-import { Notification, NotificationSchema } from './notifications/notification.schema';
-import { NotificationService } from './notifications/notification.service';
+import { UserModule } from './users/user.module';
+import { MessageModule } from './messages/message.module';
+import { NotificationModule } from './notifications/notification.module';
 import { AuthModule } from './auth/auth.module';
-
 
 const mongoDbUrl = process.env.mongoDbUrl || "mongodb://localhost:27017/kubideMessengerDb";
 
 @Module({
   imports:     [MongooseModule.forRoot(mongoDbUrl),
-                MongooseModule.forFeature([{name: User.name, schema: UserSchema}]),
-                MongooseModule.forFeature([{name: Message.name, schema: MessageSchema}]),
-                MongooseModule.forFeature([{name: Notification.name, schema: NotificationSchema}]),
+                UserModule,
+                MessageModule,
+                NotificationModule,
                 AuthModule,
                ],
-  controllers: [AppController,HealthController,UserController,MessageController,NotificationController],
-  providers:   [AppService,UserService,MessageService,NotificationService],
+  controllers: [AppController,HealthController],
+  providers:   [AppService],
 })
 export class AppModule {}
