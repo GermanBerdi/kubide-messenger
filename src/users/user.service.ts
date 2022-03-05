@@ -25,8 +25,12 @@ export class UserService {
         return await this.userModel.findById(id).exec();
     }
 
+    async readByEmail(email): Promise<User> {
+        return await this.userModel.findOne({email}).exec();
+    }
+
     async isDuplicateEmail(email: String): Promise<Boolean> {
-        const count = await this.userModel.countDocuments({email: email});
+        const count = await this.userModel.countDocuments({email});
         return (count > 0);
     }
 

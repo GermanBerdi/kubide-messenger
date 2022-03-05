@@ -12,6 +12,7 @@ import { MessageService } from './messages/message.service';
 import { NotificationController } from './notifications/notification.controller';
 import { Notification, NotificationSchema } from './notifications/notification.schema';
 import { NotificationService } from './notifications/notification.service';
+import { AuthModule } from './auth/auth.module';
 
 
 const mongoDbUrl = process.env.mongoDbUrl || "mongodb://localhost:27017/kubideMessengerDb";
@@ -21,6 +22,7 @@ const mongoDbUrl = process.env.mongoDbUrl || "mongodb://localhost:27017/kubideMe
                 MongooseModule.forFeature([{name: User.name, schema: UserSchema}]),
                 MongooseModule.forFeature([{name: Message.name, schema: MessageSchema}]),
                 MongooseModule.forFeature([{name: Notification.name, schema: NotificationSchema}]),
+                AuthModule,
                ],
   controllers: [AppController,HealthController,UserController,MessageController,NotificationController],
   providers:   [AppService,UserService,MessageService,NotificationService],

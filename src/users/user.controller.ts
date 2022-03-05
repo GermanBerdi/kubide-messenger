@@ -1,12 +1,14 @@
-import { Body, Controller, Delete, Get, HttpStatus, Param, Post, Put, Res } from "@nestjs/common";
+import { Body, Controller, Delete, Get, HttpStatus, Param, Post, Put, Res, UseGuards } from "@nestjs/common";
 import { User } from "./user.schema";
 import { UserService } from "./user.service";
+import { JwtAuthGuard } from "src/auth/jwt-auth.guard";
 
 //TODO: Secure password: 1- Encrypt them 
 //                       2- Dont return in reponses
 
 //TODO: Control Errors. Return 404 when User not found
 
+@UseGuards(JwtAuthGuard)
 @Controller('users')   
 export class UserController {
 

@@ -1,10 +1,12 @@
-import { Body, Controller, Get, HttpStatus, Param, Post, Res } from "@nestjs/common";
+import { Body, Controller, Get, HttpStatus, Param, Post, Res, UseGuards } from "@nestjs/common";
 import { Message } from "./message.schema";
 import { MessageService } from "./message.service";
 import { NotificationService } from "src/notifications/notification.service";
+import { JwtAuthGuard } from "src/auth/jwt-auth.guard";
 
 //TODO check that the user has permissions to access the message
 
+@UseGuards(JwtAuthGuard)
 @Controller('messages')   
 export class MessageController {
 
