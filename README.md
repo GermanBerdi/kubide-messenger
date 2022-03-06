@@ -77,7 +77,7 @@ https://documenter.getpostman.com/view/15547352/UVkvKYQZ
 4. Implementacion de un logout
 
 **Mas alla del planteo incial para esta version**
-1. La funcion Delete User es inconsistente porque no borra las notificaciones del usuario, ademas habria que decidir que hacer con los mensaje recibidor por ese usuario. 
+1. La funcion Delete User es inconsistente porque no borra las notificaciones del usuario, ademas habria que decidir que hacer con los mensaje recibidos por ese usuario. 
 
 ## Autor
 
