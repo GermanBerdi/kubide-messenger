@@ -11,7 +11,7 @@ https://documenter.getpostman.com/view/15547352/UVkvKYQZ
 
 ## Acceso
 
-La API se encuentra implementada en un servidor de AWS utilizando MongoDB Atlas como base de datos, puede ser accedido en la siguiente DNS pública:
+La API se esta ejecutando en un container en AWS utilizando MongoDB Atlas como base de datos, puede ser accedido en la siguiente DNS pública:
 ```
 http://ec2-34-209-140-11.us-west-2.compute.amazonaws.com
 ```
@@ -24,7 +24,7 @@ https://www.getpostman.com/collections/283552b43a4195b908cc
 Para ejecutar las llamadas de la coleccion de Postman debes crear un nuevo entorno con las siguiente variables:
 
 1. `API_URL` con el valor `http://ec2-34-209-140-11.us-west-2.compute.amazonaws.com`
-2. `token` con el valor que obtengas una vez generes uno con \auth\login  
+2. `token` con el valor que obtengas una vez generes uno con /auth/login  
 
 
 
@@ -53,14 +53,14 @@ npm install
 
 ```bash
 # development
-$ npm run start
+$ npm run start:dev
 ```
 
 ### Pruebas con Postman
 Para ejecutar las llamadas de la coleccion de Postman debes crear un nuevo entorno con las siguiente variables:
 
 1. `API_URL` con el valor `http://localhost:3000`
-2. `token` con el valor que obtengas una vez generes uno con \auth\login  
+2. `token` con el valor que obtengas una vez generes uno con /auth/login  
 
 ### Observaciones del autor.
 
