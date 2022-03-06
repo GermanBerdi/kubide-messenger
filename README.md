@@ -39,6 +39,9 @@ Para ejecutar las llamadas de la coleccion de Postman debes crear un nuevo entor
 1. `API_URL` con el valor `http://ec2-34-209-140-11.us-west-2.compute.amazonaws.com`
 2. `token` con el valor que obtengas una vez generes uno con \auth\login  
 
+Documentacion generada con Postman para uso de la API
+https://documenter.getpostman.com/view/15547352/UVkvKYQZ
+
 ## Acceso Local
 
 Si decides implementar la API localmente
@@ -71,6 +74,9 @@ Para ejecutar las llamadas de la coleccion de Postman debes crear un nuevo entor
 
 1. `API_URL` con el valor `http://localhost:3000`
 2. `token` con el valor que obtengas una vez generes uno con \auth\login  
+
+Documentacion generada con Postman para uso de la API
+https://documenter.getpostman.com/view/15547352/UVkvKYQZ
 
 ## Autor
 
