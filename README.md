@@ -1,73 +1,83 @@
 <p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo_text.svg" width="320" alt="Nest Logo" /></a>
+  <a href="https://kubide.es/" target="blank"><img src="https://kubide.es/wp-content/uploads/2016/06/logotipo-blanco-300.png" width="320" alt="Kubide Logo" /></a>
 </p>
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+## Descripción
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+**McFly NestJS / Kubide-messenger**. Ejercicio con NestJS y Mongoose. Ejemplo de una API de mensajeria entre usuarios.
 
-## Description
+### Observaciones del autor.
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+1. Cuando se obtiene la lista de todos los usuarios o la lista de usuarios activos se ocultan los password de los mismos de manera intencionada.
 
-## Installation
+**Mejoras para futuras versiones**
+1. Implementar mejor validaciones y control de errores con avisos que den pautas respecto del comportamiento de la API, por ejemplo que un usuario no pueda tener el campo mail vacio o que un usuario no pueda modificar su email si ese mail ya esta en uso por otro usuario. Tambien podrias recibir tu propio mensaje devuelto cuando se lo intentas enviar a un usuario inactivo
 
-```bash
-$ npm install
+2. Implementar distinto niveles de usuario. Un usuario con privilegios de adminitrador podria cambiar datos de otros usuario o fijar el estado de otro usuario en inactivo, cambiar la clave de otro usuario, etc.
+
+3. Las password deberian guardase encriptadas y no como texto plano en la BBDD
+
+4. Implementacion de un logout
+
+**Mas alla del planteo incial para esta version**
+1. La funcion Delete User es inconsistente porque no borra las notificaciones del usuario, ademas habria que decidir que hacer con los mensaje recibidor por ese usuario. 
+
+## Acceso
+
+La API se encuentra implementada en un servidor de AWS utilizando MongoDB Atlas como base de datos, puede ser accedido en la siguiente DNS pública:
+```
+http://ec2-34-209-140-11.us-west-2.compute.amazonaws.com
 ```
 
-## Running the app
+Para testear la API se creó una colección de Postman que podrá ser importada mediante el siguiente link:
+```
+https://www.getpostman.com/collections/283552b43a4195b908cc
+```
+
+Para ejecutar las llamadas de la coleccion de Postman debes crear un nuevo entorno con las siguiente variables:
+
+1. `API_URL` con el valor `http://ec2-34-209-140-11.us-west-2.compute.amazonaws.com`
+2. `token` con el valor que obtengas una vez generes uno con \auth\login  
+
+## Acceso Local
+
+Si decides implementar la API localmente
+
+### Prerequisitos
+- npm
+- git
+- mongoDB
+
+### Configuración
+1. Clonar el respositorio
+```bash
+git clone https://github.com/GermanBerdi/kubide-messenger.git
+```
+2. Instalar las dependencias
+```bash
+cd kubide-messenger
+npm install
+```
+
+### Ejecutando la aplicación
 
 ```bash
 # development
 $ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
 ```
 
-## Test
+### Pruebas con Postman
+Para ejecutar las llamadas de la coleccion de Postman debes crear un nuevo entorno con las siguiente variables:
 
-```bash
-# unit tests
-$ npm run test
+1. `API_URL` con el valor `http://localhost:3000`
+2. `token` con el valor que obtengas una vez generes uno con \auth\login  
 
-# e2e tests
-$ npm run test:e2e
+## Autor
 
-# test coverage
-$ npm run test:cov
-```
+**Germán Berdichevsky**
 
-## Support
-
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+- [LinkedIn](https://www.linkedin.com/in/germanberdi/)
+- [GitHub](https://github.com/GermanBerdi/)
 
 ## License
-
-Nest is [MIT licensed](LICENSE).
+- [MIT licensed](LICENSE).
