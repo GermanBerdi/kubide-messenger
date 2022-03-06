@@ -8,16 +8,23 @@ import { MessageModule } from './messages/message.module';
 import { NotificationModule } from './notifications/notification.module';
 import { AuthModule } from './auth/auth.module';
 
+//Define mongoDbUrl to access localhost if enviroment value doesnt exist
 const mongoDbUrl = process.env.mongoDbUrl || "mongodb://localhost:27017/kubideMessengerDb";
 
 @Module({
-  imports:     [MongooseModule.forRoot(mongoDbUrl),
-                UserModule,
-                MessageModule,
-                NotificationModule,
-                AuthModule,
-               ],
-  controllers: [AppController,HealthController],
-  providers:   [AppService],
+  imports: [
+    MongooseModule.forRoot(mongoDbUrl),
+    UserModule,
+    MessageModule,
+    NotificationModule,
+    AuthModule,
+  ],
+  controllers: [
+    AppController,
+    HealthController
+  ],
+  providers: [
+    AppService
+  ],
 })
 export class AppModule {}

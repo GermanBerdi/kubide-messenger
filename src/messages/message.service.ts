@@ -5,10 +5,10 @@ import { Message, MessageDocument } from "./message.schema";
 
 const populateUsers = [{
     path: "to",
-    select: "-__v",
+    select: "-password -__v",
 },{
     path: "from",
-    select:  "-__v",
+    select:  "-password -__v",
 }];
 
 @Injectable()
@@ -20,17 +20,25 @@ export class MessageService {
         const newMessage = new this.messageModel(message);
         return newMessage.save();
     }
-
-    //Populate from and to user
-    
-    async readAll(): Promise<Message[]> {
-        return await this.messageModel.find()
+   
+    // The .sort({date: -1}) is for ordering the messages from 
+    // newer to older
+    async readAll(userId): Promise<Message[]> {
+        return await this.messageModel
+            .find({ $or: [{from: userId}, {to: userId}] })
             .populate(populateUsers)
+            .sort({date: -1})
             .lean();
     }
 
-    async readById(id): Promise<Message> {
-        return await this.messageModel.findById(id)
+    async readById(id, userId): Promise<Message> {
+        return await this.messageModel
+            .find({
+                $and: [
+                    {_id: id}, 
+                    {$or: [{from: userId}, {to: userId}]}
+                ]
+            })
             .populate(populateUsers)
             .lean();
     }

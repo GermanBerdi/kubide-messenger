@@ -1,18 +1,18 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
+import { Schema as MongooseSchema } from 'mongoose';
 import { User } from '../users/user.schema';
 import { Message } from '../messages/message.schema';
-import { Schema as MongooseSchema} from 'mongoose';
 
 @Schema()
 export class Notification {
   @Prop({ required: true })
   title: string;
 
-  @Prop({ type: MongooseSchema.Types.ObjectId, ref: User.name, required: true })
+  @Prop({ required: true, type: MongooseSchema.Types.ObjectId, ref: User.name })
   owner: User;
 
-  @Prop({ type: MongooseSchema.Types.ObjectId, ref: Message.name})
+  @Prop({ type: MongooseSchema.Types.ObjectId, ref: Message.name })
   message: Message;
 
   @Prop({ required: true })

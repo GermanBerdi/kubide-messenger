@@ -14,15 +14,20 @@ export class UserService {
     }
 
     async readAll(): Promise<User[]> {
-        return await this.userModel.find().lean();
+        return await this.userModel.find().select('-password').lean();
     }
 
     async readActive(): Promise<User[]> {
-        return await this.userModel.find({active: true}).lean();
+        return await this.userModel.find({active: true}).select('-password').lean();
+    }
+    async isUserActive(id): Promise<Boolean> {
+        const count = await this.userModel
+            .countDocuments({$and: [{_id:id},{active:true}]});
+        return (count > 0);
     }
 
     async readById(id): Promise<User> {
-        return await this.userModel.findById(id).lean();
+        return await this.userModel.findById(id).select('-password').lean();
     }
 
     async readByEmail(email): Promise<User> {
@@ -35,15 +40,14 @@ export class UserService {
     }
 
     async update(id, user: User): Promise<User> {
-        return await this.userModel.findByIdAndUpdate(id, user, {new: true})
+        return await this.userModel.findByIdAndUpdate(id, user, {new: true}).select('-password')
     }
 
     async updateStatus(id, status: Boolean): Promise<User> {
-        console.log('El valor de status es ', status);
-        return await this.userModel.findByIdAndUpdate(id, {active: status}, {new: true})
+        return await this.userModel.findByIdAndUpdate(id, {active: status}, {new: true}).select('-password')
     }
 
     async delete(id): Promise<any> {
-        return await this.userModel.findByIdAndRemove(id);
+        return await this.userModel.findByIdAndRemove(id).select('-password');
     }
 }

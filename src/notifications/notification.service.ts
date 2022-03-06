@@ -13,24 +13,25 @@ export class NotificationService {
         return newNotification.save();
     }
    
-    async readAll(): Promise<Notification[]> {
-        return await this.notificationModel.find()
-            .populate("owner")
+    async readAll(userId): Promise<Notification[]> {
+        return await this.notificationModel.find({owner: userId})
+            .select ("-owner")
             .populate("message")
             .lean();
     }
 
+    //TODO: This was not required, Delete?
     async readById(id): Promise<Notification> {
         return await this.notificationModel.findById(id)
-            .populate("owner")
             .populate("message")
             .lean();
     }
-
+    //TODO: This was not required, Delete?
     async update(id, notification: Notification): Promise<Notification> {
         return await this.notificationModel.findByIdAndUpdate(id, notification, {new: true})
     }
-
+    
+    //TODO: This was not required, Delete?
     async delete(id): Promise<any> {
         return await this.notificationModel.findByIdAndRemove(id);
     }
