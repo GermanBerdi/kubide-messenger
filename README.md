@@ -85,6 +85,3 @@ https://documenter.getpostman.com/view/15547352/UVkvKYQZ
 
 - [LinkedIn](https://www.linkedin.com/in/germanberdi/)
 - [GitHub](https://github.com/GermanBerdi/)
-
-## License
-- [MIT licensed](LICENSE).
