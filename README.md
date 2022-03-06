@@ -6,9 +6,6 @@
 
 **McFly NestJS / Kubide-messenger**. Ejercicio con NestJS y Mongoose. Ejemplo de una API de mensajeria entre usuarios.
 
-Documentacion generada con Postman para uso de la API
-https://documenter.getpostman.com/view/15547352/UVkvKYQZ
-
 ## Acceso
 
 La API se esta ejecutando en un container en AWS utilizando MongoDB Atlas como base de datos, puede ser accedido en la siguiente DNS pública:
@@ -61,6 +58,10 @@ Para ejecutar las llamadas de la coleccion de Postman debes crear un nuevo entor
 
 1. `API_URL` con el valor `http://localhost:3000`
 2. `token` con el valor que obtengas una vez generes uno con /auth/login  
+
+### Documentacion generada con Postman para uso de la API
+
+https://documenter.getpostman.com/view/15547352/UVkvKYQZ
 
 ### Observaciones del autor.
 
